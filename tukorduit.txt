@@ -1,12 +1,12 @@
-curconv(){
+tukorduit(){
 
 currency=$(curl "http://finance.google.com/finance/converter?a=$1&from=$2&to=$3" 2>/dev/null |grep class=bld|awk -F"\<\|\>" 2>/dev/null {'print $3, $5'})
 
 if [[ $1 -ne 1 ]]; then
+	printf "$currency\n"
 	convert=$(echo $currency|awk {'print $4'})
-	printf "Nilai untuk 1 $2 ialah RM `echo "scale=4;$convert/$1"|bc`\n"
+	printf "Nilai untuk 1 ${2^^} ialah `echo "scale=4;$convert/$1"|bc` ${3^^}\n"
 else
-	echo $currency
+	printf "$currency\n"
 fi
-
 }
