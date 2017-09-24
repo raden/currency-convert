@@ -1,9 +1,9 @@
-# currency-convert
+# currency-converter
 
 1) Put the script inside your $HOME/.bashrc, append it anywhere as you like
 2) Then run source $HOME/.bashrc
-3) Use the following syntax `curconv <value> <source currency> <intended currency> 
+3) Use the following syntax `tukorduit <value> <source currency> <intended currency> 
 
-e.g : curconv 100 USD MYR
+e.g : tukorduit 100 USD MYR
 
 
