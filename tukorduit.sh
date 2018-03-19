@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Written by Muhammad Najmi Ahmad Zabidi
 PROGNAME=`basename $0`
 re='^[0-9]+([.][0-9]+)?$'
 
