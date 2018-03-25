@@ -10,8 +10,10 @@ usage() {
 
 tukorduit(){
 
-currency=$(curl "http://finance.google.com/finance/converter?a=$1&from=$2&to=$3" 2>/dev/null |grep class=bld|awk -F"\<\|\>" 2>/dev/null {'print $3, $5'})
-
+currency=$(lynx -dump https://www.google.com/search?q=$1$2+$3|grep "Malaysian Ringgit"|head -1|awk {'print $1,$5'})
+currency2=$(echo $currency|sed 's/,//g'|awk -F " " {'print $1'})
+currency3=$(echo $currency|sed 's/,//g'|awk -F " " {'print $2'})
+currency4=$(echo "scale=4;$currency3/$currency2"|bc)
 
 if ! [[ $1 =~ $re ]] ; then
 	printf "Please insert a valid number or decimal if needed\n" >&2
@@ -21,18 +23,15 @@ elif  [[ -z $1  || -z $2 || -z $3 ]]; then
 	exit 0
 
 elif [[ $1 -ne 1 ]]; then
-	printf "$currency\n"
-	convert=$(echo $currency|awk {'print $4'})
-	if [[ $2 == *[a-z]* ]] || [[ $3 == *[a-z]* ]]; then 
-		new2=$(echo $2|tr [a-z] [A-Z])
-		new3=$(echo $3|tr [a-z] [A-Z])
-		printf "Nilai untuk 1 $new2 ialah `echo "scale=4;$convert/$1"|bc` $new3\n"
-	else
-		printf "Nilai untuk 1 $2 ialah `echo "scale=4;$convert/$1"|bc` $3\n"
-	fi
+        echo ""
+        echo -e "${YELLOW}------------KADAR TUKARAN PASARAN----------${NC}"
+        printf "Nilai utk $currency2 ${2^^} ialah $currency3 ${3^^}\n"
+        echo -n
+        echo -e "Nilai untuk 1 ${2^^} ialah ${GREEN}${3^^} $currency4\n${NC}"
+	exit 0
 
 else
-	printf "$currency\n"
+	printf "Not sure what to do"
 
 fi
 
