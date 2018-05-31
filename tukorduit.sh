@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/bash
 # Written by Muhammad Najmi Ahmad Zabidi
 PROGNAME=`basename $0`
 re='^[0-9]+([.][0-9]+)?$'
@@ -15,7 +15,7 @@ YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-currency=$(lynx -dump https://www.google.com/search?q=$1$2+$3|grep "Malaysian Ringgit"|head -1|awk {'print $1,$5'})
+currency=$(lynx -dump https://www.google.com/search?q=$1$2+$3|grep "Malaysian Ringgit"|head -1|awk {'print $1,$6'})
 currency2=$(echo $currency|sed 's/,//g'|awk -F " " {'print $1'})
 currency3=$(echo $currency|sed 's/,//g'|awk -F " " {'print $2'})
 currency4=$(echo "scale=4;$currency3/$currency2"|bc)
