@@ -1,7 +1,7 @@
 #!/bin/bash -l
 
 if [ -z `which jq` ]; then
-	printf "You need to install jq, a JSON parsing tool"
+	printf "You need to install jq, a JSON parsing tool \n"
 	exit
 fi
 
