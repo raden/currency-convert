@@ -17,14 +17,12 @@ target=$(echo $3|tr '[:lower:]' '[:upper:]')
 sumber=$(curl https://exchangeratesapi.io/api/latest?base=$sourcemoney 2>/dev/null\
 |jq '.'|grep -i $target |awk -F":\|," {'print $2'} 2>/dev/null)
 
-jumlah=$(echo "$1*$sumber"|bc)
+jumlah=$(printf "%f*%f\n" $1 $sumber|bc)
 
-echo -e "Price per unit: ${GREEN}1 $sourcemoney${NC} =  ${YELLOW}$sumber $target${NC}"
-echo -n
+printf "Price per unit: ${GREEN}1 $sourcemoney${NC} =  ${YELLOW}$target %.2f${NC}\n"  $sumber
 
 echo -e "Source monies: ${YELLOW}$sourcemoney $1${NC}"
 echo -n
 
-echo -e "Total monies after the conversion: ${YELLOW}$target $jumlah${NC}"
-echo -n
+printf "Total monies after the conversion: ${YELLOW}$target %.2f ${NC}\n" $jumlah
 
