@@ -1,5 +1,6 @@
 #!/bin/bash -l
 # Written by Muhammad Najmi Ahmad Zabidi, 2018
+# Updated Dec 2019
 
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -14,7 +15,7 @@ fi
 sourcemoney=$(echo $2|tr '[:lower:]' '[:upper:]')
 target=$(echo $3|tr '[:lower:]' '[:upper:]')
 
-sumber=$(curl https://exchangeratesapi.io/api/latest?base=$sourcemoney 2>/dev/null\
+sumber=$(curl https://api.exchangeratesapi.io/api/latest?base=$sourcemoney 2>/dev/null\
 |jq '.'|grep -i $target |awk -F":\|," {'print $2'} 2>/dev/null)
 
 jumlah=$(printf "%f*%f\n" $1 $sumber|bc)
@@ -25,4 +26,3 @@ echo -e "Source monies: ${YELLOW}$sourcemoney $1${NC}"
 echo -n
 
 printf "Total monies after the conversion: ${YELLOW}$target %.2f ${NC}\n" $jumlah
-
